@@ -1,0 +1,1 @@
+cmd_/home/embedded2022/working/Embedded_System/02led_button/Module.symvers := sed 's/\.ko$$/\.o/' /home/embedded2022/working/Embedded_System/02led_button/modules.order | scripts/mod/modpost -m -a  -o /home/embedded2022/working/Embedded_System/02led_button/Module.symvers -e -i Module.symvers   -T -

@@ -3,7 +3,7 @@ RESULT = major_num_example
 SRC = $(RESULT).c
 
 all:
-	make -C /home/vlsiemb/working/kernel M=$(PWD) modules
+	make -C /home/embedded2022/working/kernel M=$(PWD) modules
 	aarch64-linux-gnu-gcc -o $(RESULT) $(SRC)
 
 clean:

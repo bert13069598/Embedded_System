@@ -1,0 +1,1 @@
+cmd_/home/embedded2022/working/Embedded_System/02led_button/modules.order := {   echo /home/embedded2022/working/Embedded_System/02led_button/dev_nr.ko; :; } | awk '!x[$$0]++' - > /home/embedded2022/working/Embedded_System/02led_button/modules.order
