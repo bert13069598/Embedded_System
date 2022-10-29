@@ -3,11 +3,11 @@
 #include <linux/fs.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Hohannes 4 GNU/LINUX");
+MODULE_AUTHOR("Johannes 4 GNU/LINUX");
 MODULE_DESCRIPTION("Registers a device nr. and implement some callback functions");
 
 static int driver_open(struct inode *device_file, struct file *instance){
-	printk("dev_nr - open was callde!\n");
+	printk("dev_nr - open was called!\n");
 	return 0;
 }
 
@@ -36,7 +36,7 @@ static int __init ModuleInit(void) {
 		printk("dev_nr - registered Device number Major: %d, Minor: %d\n", retval>>20,retval&0xfffff);
 	}
 	else{
-		printk("Vould not register device number!\n");
+		printk("Could not register device number!\n");
 		return -1;
 	}
 	return 0;
