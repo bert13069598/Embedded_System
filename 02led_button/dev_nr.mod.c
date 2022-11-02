@@ -27,10 +27,11 @@ MODULE_INFO(retpoline, "Y");
 
 static const struct modversion_info ____versions[]
 __used __section("__versions") = {
-	{ 0xc2a194f5, "module_layout" },
+	{ 0x37f3c8fe, "module_layout" },
 	{ 0x6bc3fbc0, "__unregister_chrdev" },
-	{ 0xc739763, "__register_chrdev" },
+	{ 0xc56abe33, "__register_chrdev" },
 	{ 0x92997ed8, "_printk" },
+	{ 0x1fdc7df2, "_mcount" },
 };
 
 MODULE_INFO(depends, "");
