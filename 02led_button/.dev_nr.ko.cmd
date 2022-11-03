@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/working/Embedded_System/02led_button/dev_nr.ko := aarch64-linux-gnu-ld -r  -EL  -maarch64elf -z noexecstack   --build-id=sha1  -T scripts/module.lds -o /home/ubuntu/working/Embedded_System/02led_button/dev_nr.ko /home/ubuntu/working/Embedded_System/02led_button/dev_nr.o /home/ubuntu/working/Embedded_System/02led_button/dev_nr.mod.o;  true
