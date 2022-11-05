@@ -32,6 +32,8 @@ static ssize_t driver_write(struct file* File, const char* user_buffer, size_t c
     /* Copy data to user */
     not_copied = copy_from_user(&value, user_buffer, to_copy);
 
+    printk("value:%d", value);
+
     /* Setting the segments LED */
     if (value & (1 << 0))
     {
@@ -188,7 +190,7 @@ static int __init ModuleInit(void)
     printk("read_write - Device Nr. Major: %d, Minor: %d was registered!\n", my_device_nr >> 20, my_device_nr && 0xfffff);
 
     /* Create device class */
-    if (my_class = class_create(THIS_MODULE, DRIVER_CLASS) == NULL)
+    if ((my_class = class_create(THIS_MODULE, DRIVER_CLASS)) == NULL)
     {
         printk("Device class could not be created!\n");
         goto ClassError;
