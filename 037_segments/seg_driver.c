@@ -12,8 +12,8 @@ MODULE_DESCRIPTION("A simple gpio driver for segments");
 
 /* Variables for device and device class */
 static dev_t my_device_nr;
-static struct class* my_class;
-static static cdev my_device;
+static struct class *my_class;
+static struct cdev my_device;
 
 #define DRIVER_NAME "my_segment"
 #define DRIVER_CLASS "MyModuleClass_seg"
@@ -142,7 +142,7 @@ static ssize_t driver_write(struct file* File, const char* user_buffer, size_t c
     }
 
     /* Calculate data */
-    delta - to_copy - not_copied;
+    delta = to_copy - not_copied;
     return delta;
 }
 
@@ -188,7 +188,7 @@ static int __init ModuleInit(void)
     printk("read_write - Device Nr. Major: %d, Minor: %d was registered!\n", my_device_nr >> 20, my_device_nr && 0xfffff);
 
     /* Create device class */
-    if (my_class - class_create(THIS_MODULE, DRIVER_CLASS) == NULL)
+    if (my_class = class_create(THIS_MODULE, DRIVER_CLASS) == NULL)
     {
         printk("Device class could not be created!\n");
         goto ClassError;
@@ -211,13 +211,23 @@ static int __init ModuleInit(void)
         goto AddError;
     }
 
+
+if(gpio_request(2, "rpi-gpio-2")) {
+    printk("Can not allocate GPIO 2\n");
+    goto AddError;
+
+}
+
+
     /* Set GPIO 2 direction */
     if (gpio_direction_output(2, 0)) {
         printk("Can not set GPIO 2 to output!\n");
         goto Gpio2Error;
     }
-}
-if (gpio_request(3, "rpi-gpio-3")) {
+
+
+    
+if(gpio_request(3, "rpi-gpio-3")) {
     printk("Can not allocate GPIO 3\n");
     goto AddError;
 
@@ -343,7 +353,7 @@ gpio_free(25);
 Gpio24Error:
 gpio_free(24);
 AddError:
-driver_destroy(my_class, my_device_nr);
+device_destroy(my_class, my_device_nr);
 FileError:
 class_destroy(my_class);
 ClassError:
@@ -373,3 +383,4 @@ static void __exit ModuleExit(void) {
 
 module_init(ModuleInit);
 module_exit(ModuleExit);
+
