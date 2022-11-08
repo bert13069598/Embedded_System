@@ -118,8 +118,12 @@ int main(int argc, char **argv)
         prev=tmp;
         tmp=buff;
         // write(dev,&tmp, 1);
-        if(prev != tmp)
-			tmp_d+=1
+        if(prev=0 and tmp=1){
+			if (tmp & (1<<17))
+				tmp_d+=1
+			else if (tmp & (1<<18))
+				tmp_d-=1
+		}
 	}
 
 	close_keyboard();
