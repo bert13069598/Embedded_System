@@ -21,7 +21,7 @@ static struct cdev my_device;
 /**
  * @brief Read data out of the buffer
  */
-static ssize_t driver_read1(struct file *File, char *user_buffer, size_t count, loff_t *offs){
+static ssize_t driver_read(struct file *File, char *user_buffer, size_t count, loff_t *offs){
     int to_copy, not_copied, delta;
     char tmp;
 
@@ -30,6 +30,7 @@ static ssize_t driver_read1(struct file *File, char *user_buffer, size_t count, 
 
     /* Read value of button */
     tmp = gpio_get_value(26) + '0';
+    printk("%c",gpio_get_value(26));
 
     /* Copy data to user */
     not_copied = copy_to_user(user_buffer, &tmp, to_copy);
@@ -39,24 +40,7 @@ static ssize_t driver_read1(struct file *File, char *user_buffer, size_t count, 
 
     return delta;
 }
-static ssize_t driver_read2(struct file *File, char *user_buffer, size_t count, loff_t *offs){
-    int to_copy, not_copied, delta;
-    char tmp;
 
-    /* Get amount of data to copy */
-    to_copy = min(count, sizeof(tmp));
-
-    /* Read value of button */
-    tmp = gpio_get_value(27) + '0';
-
-    /* Copy data to user */
-    not_copied = copy_to_user(user_buffer, &tmp, to_copy);
-
-    /* Calculate data */
-    delta = to_copy - not_copied;
-
-    return delta;
-}
 
 
 /**
@@ -110,8 +94,7 @@ static ssize_t driver_read2(struct file *File, char *user_buffer, size_t count, 
     .owner = THIS_MODULE,
     .open = driver_open,
     .release = driver_close,
-    .read1 = driver_read1,
-    .read2 = driver_read2,
+    .read = driver_read,
     .write = driver_write
  };
  
