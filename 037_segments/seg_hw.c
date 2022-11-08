@@ -57,6 +57,10 @@ int main(int argc, char **argv)
 	int tmp_d;
 	int tmp_d1, tmp_d2, tmp_d3,tmp_d4;
 
+	char buff;
+    char tmp;
+    char prev='r';
+
 	int dev = open("/dev/my_segment", O_RDWR);
 
 	if(dev == -1){
@@ -108,6 +112,14 @@ int main(int argc, char **argv)
 		if(tmp_n > 3){
 			tmp_n = 0;
 		}
+
+		// related to button
+		read(dev, &buff,1);
+        prev=tmp;
+        tmp=buff;
+        // write(dev,&tmp, 1);
+        if(prev != tmp)
+			tmp_d+=1
 	}
 
 	close_keyboard();
