@@ -118,12 +118,11 @@ int main(int argc, char **argv)
         prev=tmp;
         tmp=buff;
         // write(dev,&tmp, 1);
-        if(prev=0 and tmp=1){
-			if (tmp & (1<<26))
-				tmp_d+=1
-			else if (tmp & (1<<27))
-				tmp_d-=1
-		}
+        if(prev=='0' && tmp=='1')
+			tmp_d+=1;
+		else if (prev=='0' && tmp=='2')
+			tmp_d-=1;
+		
 	}
 
 	close_keyboard();

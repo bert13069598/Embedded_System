@@ -147,7 +147,7 @@ static ssize_t driver_read(struct file *File, char *user_buffer, size_t count, l
 
 	if (gpio_direction_input(26)) {
 		printk("Can not set  GPIO26 to input! \n");
-		goto Gpio16Error;
+		goto Gpio26Error;
 	}
 
 	if (gpio_request(27, "rpi-gpio-27")) {
