@@ -29,8 +29,14 @@ static ssize_t driver_read(struct file *File, char *user_buffer, size_t count, l
     to_copy = min(count, sizeof(tmp));
 
     /* Read value of button */
-    tmp = gpio_get_value(26) + '0';
-    printk("%c",gpio_get_value(26));
+    if((int)(gpio_get_value(26) + '0') == 1)
+    {
+	    tmp='1';
+    }
+    else if((int)(gpio_get_value(27) + '0') == 1)
+    {
+	    tmp='2';
+    }
 
     /* Copy data to user */
     not_copied = copy_to_user(user_buffer, &tmp, to_copy);
