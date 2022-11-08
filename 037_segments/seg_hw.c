@@ -119,9 +119,9 @@ int main(int argc, char **argv)
         tmp=buff;
         // write(dev,&tmp, 1);
         if(prev=0 and tmp=1){
-			if (tmp & (1<<17))
+			if (tmp & (1<<26))
 				tmp_d+=1
-			else if (tmp & (1<<18))
+			else if (tmp & (1<<27))
 				tmp_d-=1
 		}
 	}
