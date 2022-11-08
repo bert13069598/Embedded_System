@@ -38,11 +38,21 @@ char get_key()
 		ch = -1;
 	return ch;
 }
+//test code
+short get_buff()
+{
+	short buff = -1;
+	if(read(STDIN_FILENO, &buff,1) != 1)
+		buff = -1;
+	return buff;
+}
 
 void print_menu()
 {
 	printf("\n----------menu----------\n");
-	printf("[r] : program reset\n");
+	printf("[u] : count up\n");
+	printf("[d] : count down\n");
+	printf("[p] : count setting\n");
 	printf("[q] : program exit\n");
 	printf("------------------------\n\n");
 }
@@ -51,6 +61,7 @@ int main(int argc, char **argv)
 {
 	unsigned short data[4];
 	char key;
+	short buff;
 	int tmp_n;
 	int delay_time;
 	
@@ -68,7 +79,7 @@ int main(int argc, char **argv)
 	init_keyboard();
 	print_menu();
 	tmp_n=0; // related to pos 
-	tmp_d =4321;
+	tmp_d =0;
 	tmp_d1=tmp_d/1000; // related to seg
 	tmp_d2=(tmp_d%1000)/100;
 	tmp_d3=(tmp_d%100)/10;
@@ -87,14 +98,19 @@ int main(int argc, char **argv)
 			printf("exit this program.\n");
 			break;
 		}
-		else if(key == 'r'){
-			//delay_time = 500000;
-			delay_time = 500;
-			tmp_n=0;
+		else if(key == 'u'){
+			
+			tmp_d++;
+		
 		}
-
-		write(dev, &data[tmp_n],2);
-		usleep(delay_time);
+		else if(key == 'd'){
+			tmp_d--;
+		}
+		else if(key == 'p'){
+			//buffer needed
+			buff = get_buff();
+			tmp_d = (unsigned short)strtol(&buff,NULL,10);	
+		}
 
 		//tmp_d++;
 		if (tmp_d>9999){
@@ -103,6 +119,10 @@ int main(int argc, char **argv)
 		else if (tmp_d<0){
 			tmp_d=9999;
 		}
+
+		write(dev, &data[tmp_n],2);
+		usleep(delay_time);
+		
 
 		tmp_n++;
 		if(tmp_n > 3){
