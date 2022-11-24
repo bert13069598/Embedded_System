@@ -1,1 +1,0 @@
-cmd_/home/ubuntu/working/Embedded_System/02led_button/gpio_driver.mod := { echo  /home/ubuntu/working/Embedded_System/02led_button/gpio_driver.o;  echo; } > /home/ubuntu/working/Embedded_System/02led_button/gpio_driver.mod

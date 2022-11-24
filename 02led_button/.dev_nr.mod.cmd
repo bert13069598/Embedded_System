@@ -1,1 +1,0 @@
-cmd_/home/ubuntu/working/Embedded_System/02led_button/dev_nr.mod := { echo  /home/ubuntu/working/Embedded_System/02led_button/dev_nr.o;  echo; } > /home/ubuntu/working/Embedded_System/02led_button/dev_nr.mod

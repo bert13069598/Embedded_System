@@ -1,1 +1,0 @@
-cmd_/home/ubuntu/working/Embedded_System/02led_button/Module.symvers := sed 's/\.ko$$/\.o/' /home/ubuntu/working/Embedded_System/02led_button/modules.order | scripts/mod/modpost -m -a  -o /home/ubuntu/working/Embedded_System/02led_button/Module.symvers -e -i Module.symvers   -T -
