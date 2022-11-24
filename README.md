@@ -6,6 +6,8 @@ raspberrypi kernel
 
 Linux 6.0.8
 
+OpenCV 4.5.1
+
 
 Project example
 딥러닝을 이용한 Deblurring 후 OCR을 이용하여 흐릿한 이미지의 정보 추출
