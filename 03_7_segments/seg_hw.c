@@ -53,6 +53,9 @@ int main(int argc, char **argv)
 	char key;
 	int tmp_n;
 	int delay_time;
+	
+	int tmp_d;
+	int tmp_d1, tmp_d2, tmp_d3,tmp_d4;
 
 	int dev = open("/dev/my_segment", O_RDWR);
 
@@ -64,13 +67,19 @@ int main(int argc, char **argv)
 
 	init_keyboard();
 	print_menu();
-	tmp_n=0;
-	delay_time = 1000000;
+	tmp_n=0; // related to pos 
+	tmp_d =4321;
+	tmp_d1=tmp_d/1000; // related to seg
+	tmp_d2=(tmp_d%1000)/100;
+	tmp_d3=(tmp_d%100)/10;
+	tmp_d4=tmp_d%10;
+	// delay_time = 500000;
+	delay_time = 500;
 
-	data[0] = (seg_num[1] << 4) | D1;
-	data[1] = (seg_num[2] << 4) | D2;
-	data[2] = (seg_num[3] << 4) | D3;
-	data[3] = (seg_num[4] << 4) | D4;
+	data[0] = (seg_num[tmp_d1] << 4) | D1;
+	data[1] = (seg_num[tmp_d2] << 4) | D2;
+	data[2] = (seg_num[tmp_d3] << 4) | D3;
+	data[3] = (seg_num[tmp_d4] << 4) | D4;
 
 	while(1){
 		key = get_key();
@@ -79,19 +88,25 @@ int main(int argc, char **argv)
 			break;
 		}
 		else if(key == 'r'){
-			delay_time = 1000000;
+			//delay_time = 500000;
+			delay_time = 500;
 			tmp_n=0;
 		}
 
 		write(dev, &data[tmp_n],2);
 		usleep(delay_time);
 
+		//tmp_d++;
+		if (tmp_d>9999){
+			tmp_d=0;
+		}
+		else if (tmp_d<0){
+			tmp_d=9999;
+		}
+
 		tmp_n++;
 		if(tmp_n > 3){
 			tmp_n = 0;
-			if(delay_time > 5000){
-				delay_time /= 2;
-			}
 		}
 	}
 
