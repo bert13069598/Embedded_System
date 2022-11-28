@@ -15,3 +15,6 @@ Project example
 https://www.youtube.com/watch?v=prJRNa-40jo&t=3s
 
 https://github.com/KupynOrest/DeblurGAN
+
+
+https://github.com/fatalfeel/DeblurGAN
