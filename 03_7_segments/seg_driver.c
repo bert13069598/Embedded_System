@@ -21,7 +21,7 @@ static struct cdev my_device;
 /**
  * @brief Write data to buffer
  */
-static ssize_t driver_write(struct file* File, const char* user_buffer, size_t count, loff_t* offs)
+static ssize_t driver_write(struct file *File, const char *user_buffer, size_t count, loff_t *offs)
 {
     int to_copy, not_copied, delta;
     unsigned short value = 0;
@@ -149,7 +149,7 @@ static ssize_t driver_write(struct file* File, const char* user_buffer, size_t c
 /**
  * @brief This function is called, when the device file is opened
  */
-static int driver_open(struct inode* device_file, struct file* instance)
+static int driver_open(struct inode *device_file, struct file *instance)
 {
     printk("segment - open was called!\n");
     return 0;
@@ -158,7 +158,7 @@ static int driver_open(struct inode* device_file, struct file* instance)
 /**
  * @brief This function is called, when the device file is opened
  */
-static int driver_close(struct inode* device_file, struct file* instance)
+static int driver_close(struct inode *device_file, struct file *instance)
 {
     printk("segment - close was called!\n");
     return 0;
@@ -169,7 +169,7 @@ static struct file_operations fops = {
     .open = driver_open,
     .release = driver_close,
     //.read = driver_read,
-    .write = driver_write };
+    .write = driver_write};
 
 /**
  * @brief This function is called, when the module is loaded into the kernel
@@ -211,157 +211,176 @@ static int __init ModuleInit(void)
         goto AddError;
     }
 
-
-if(gpio_request(2, "rpi-gpio-2")) {
-    printk("Can not allocate GPIO 2\n");
-    goto AddError;
-
-}
-
+    if (gpio_request(2, "rpi-gpio-2"))
+    {
+        printk("Can not allocate GPIO 2\n");
+        goto AddError;
+    }
 
     /* Set GPIO 2 direction */
-    if (gpio_direction_output(2, 0)) {
+    if (gpio_direction_output(2, 0))
+    {
         printk("Can not set GPIO 2 to output!\n");
         goto Gpio2Error;
     }
 
+    if (gpio_request(3, "rpi-gpio-3"))
+    {
+        printk("Can not allocate GPIO 3\n");
+        goto AddError;
+    }
+    // Set GPIO 3 direction
+    if (gpio_direction_output(3, 0))
+    {
+        printk("Can not set GPIO 3 to output!\n");
+        goto Gpio3Error;
+    }
+    /* GPIO'4 init */
+    if (gpio_request(4, "rpi-gpio-4"))
+    {
+        printk("Can not allocate GPIO 4\n");
+        goto AddError;
+    }
+    /*Set GPIO & direction*/
+    if (gpio_direction_output(4, 0))
+    {
+        printk("Can not set GPIO 4 to output!\n");
+        goto Gpio4Error;
+    }
+    /*GPIO 17 init*/
+    if (gpio_request(17, "rpi-gpio-17"))
+    {
+        printk("Can not allocate GPIO 17\n");
+        goto AddError;
+    }
+    /* Set GPIO 17 direction */
+    if (gpio_direction_output(17, 0))
+    {
+        printk("Can not set GPIO 17 to output!\n");
+        goto Gpio17Error;
+    }
+    /* Set A-OP segments GPIO */
+    /*GPIO 21 init*/
+    if (gpio_request(21, "rpi-gpio-21"))
+    {
+        printk("Can not allocate GPIO 21\n");
+        goto AddError;
+    }
+    /*Set GP10 21 direction*/
+    if (gpio_direction_output(21, 0))
+    {
+        printk("Can not set GPIO 21 to output!\n");
+        goto Gpio21Error;
+    }
+    /*GPIO 20-init*/
+    if (gpio_request(20, "rpi-gpio-20"))
+    {
+        printk("Can not allocate GPIO 20\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(20, 0))
+    {
+        printk("Can ingt set GPIO 20 to output!\n");
+        goto Gpio20Error;
+    }
+    if (gpio_request(16, "rpi-gpio-16"))
+    {
+        printk("Can not allocate GPIO 16\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(16, 0))
+    {
+        printk("Can ingt set GPIO 16 to output!\n");
+        goto Gpio16Error;
+    }
+    if (gpio_request(12, "rpi-gpio-12"))
+    {
+        printk("Can not allocate GPIO 16\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(12, 0))
+    {
+        printk("Can ingt set GP10 12 to output!\n");
+        goto Gpio12Error;
+    }
+    if (gpio_request(7, "rpi-gpio-7"))
+    {
+        printk("Can not allocate GPIO 7\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(7, 0))
+    {
+        printk("Can ingt set GPIO 7 to output!\n");
+        goto Gpio7Error;
+    }
+    if (gpio_request(8, "rpi-gpio-8"))
+    {
+        printk("Can not allocate GPIO 16\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(8, 0))
+    {
+        printk("Can ingt set GPIO 8 to output!\n");
+        goto Gpio8Error;
+    }
+    if (gpio_request(25, "rpi-gpio-25"))
+    {
+        printk("Can not allocate GPIO 25\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(25, 0))
+    {
+        printk("Can ingt set GPIO 25 to output!\n");
+        goto Gpio25Error;
+    }
+    if (gpio_request(24, "rpi-gpio-24"))
+    {
+        printk("Can not allocate GPIO 24\n");
+        goto AddError;
+    }
+    if (gpio_direction_output(24, 0))
+    {
+        printk("Can ingt set GPIO 24 to output!\n");
+        goto Gpio24Error;
+    }
 
-    
-if(gpio_request(3, "rpi-gpio-3")) {
-    printk("Can not allocate GPIO 3\n");
-    goto AddError;
-
-}
-//Set GPIO 3 direction
-if (gpio_direction_output(3, 0)) {
-    printk("Can not set GPIO 3 to output!\n");
-    goto Gpio3Error;
-}
-/* GPIO'4 init */
-if (gpio_request(4, "rpi-gpio-4")) {
-    printk("Can not allocate GPIO 4\n");
-    goto AddError;
-}
-/*Set GPIO & direction*/
-if (gpio_direction_output(4, 0)) {
-    printk("Can not set GPIO 4 to output!\n");
-    goto Gpio4Error;
-}
-/*GPIO 17 init*/
-if (gpio_request(17, "rpi-gpio-17")) {
-    printk("Can not allocate GPIO 17\n");
-    goto AddError;
-}
-/* Set GPIO 17 direction */
-if (gpio_direction_output(17, 0)) {
-    printk("Can not set GPIO 17 to output!\n");
-    goto Gpio17Error;
-}
-/* Set A-OP segments GPIO */
-/*GPIO 21 init*/
-if (gpio_request(21, "rpi-gpio-21")) {
-    printk("Can not allocate GPIO 21\n");
-    goto AddError;
-}
-/*Set GP10 21 direction*/
-if (gpio_direction_output(21, 0)) {
-    printk("Can not set GPIO 21 to output!\n");
-    goto Gpio21Error;
-}
-/*GPIO 20-init*/
-if (gpio_request(20, "rpi-gpio-20")) {
-    printk("Can not allocate GPIO 20\n");
-    goto AddError;
-}
-if (gpio_direction_output(20, 0)) {
-    printk("Can ingt set GPIO 20 to output!\n");
-    goto Gpio20Error;
-}
-if (gpio_request(16, "rpi-gpio-16")) {
-    printk("Can not allocate GPIO 16\n");
-    goto AddError;
-}
-if (gpio_direction_output(16, 0)) {
-    printk("Can ingt set GPIO 16 to output!\n");
-    goto Gpio16Error;
-}
-if (gpio_request(12, "rpi-gpio-12")) {
-    printk("Can not allocate GPIO 16\n");
-    goto AddError;
-}
-if (gpio_direction_output(12, 0)) {
-    printk("Can ingt set GP10 12 to output!\n");
-    goto Gpio12Error;
-}
-if (gpio_request(7, "rpi-gpio-7")) {
-    printk("Can not allocate GPIO 7\n");
-    goto AddError;
-}
-if (gpio_direction_output(7, 0)) {
-    printk("Can ingt set GPIO 7 to output!\n");
-    goto Gpio7Error;
-}
-if (gpio_request(8, "rpi-gpio-8")) {
-    printk("Can not allocate GPIO 16\n");
-    goto AddError;
-}
-if (gpio_direction_output(8, 0)) {
-    printk("Can ingt set GPIO 8 to output!\n");
-    goto Gpio8Error;
-}
-if (gpio_request(25, "rpi-gpio-25")) {
-    printk("Can not allocate GPIO 25\n");
-    goto AddError;
-}
-if (gpio_direction_output(25, 0)) {
-    printk("Can ingt set GPIO 25 to output!\n");
-    goto Gpio25Error;
-}
-if (gpio_request(24, "rpi-gpio-24")) {
-    printk("Can not allocate GPIO 24\n");
-    goto AddError;
-}
-if (gpio_direction_output(24, 0)) {
-    printk("Can ingt set GPIO 24 to output!\n");
-    goto Gpio24Error;
-}
-
-return 0;
+    return 0;
 
 Gpio2Error:
-gpio_free(2);
+    gpio_free(2);
 Gpio3Error:
-gpio_free(3);
+    gpio_free(3);
 Gpio4Error:
-gpio_free(4);
+    gpio_free(4);
 Gpio17Error:
-gpio_free(17);
+    gpio_free(17);
 Gpio21Error:
-gpio_free(21);
+    gpio_free(21);
 Gpio20Error:
-gpio_free(20);
+    gpio_free(20);
 Gpio16Error:
-gpio_free(16);
+    gpio_free(16);
 Gpio12Error:
-gpio_free(12);
+    gpio_free(12);
 Gpio7Error:
-gpio_free(7);
+    gpio_free(7);
 Gpio8Error:
-gpio_free(8);
+    gpio_free(8);
 Gpio25Error:
-gpio_free(25);
+    gpio_free(25);
 Gpio24Error:
-gpio_free(24);
+    gpio_free(24);
 AddError:
-device_destroy(my_class, my_device_nr);
+    device_destroy(my_class, my_device_nr);
 FileError:
-class_destroy(my_class);
+    class_destroy(my_class);
 ClassError:
-unregister_chrdev_region(my_device_nr, 1);
-return -1;
+    unregister_chrdev_region(my_device_nr, 1);
+    return -1;
 }
 
-static void __exit ModuleExit(void) {
+static void __exit ModuleExit(void)
+{
     gpio_set_value(2, 0);
     gpio_set_value(3, 0);
     gpio_set_value(4, 0);
@@ -383,4 +402,3 @@ static void __exit ModuleExit(void) {
 
 module_init(ModuleInit);
 module_exit(ModuleExit);
-
